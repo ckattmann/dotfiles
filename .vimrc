@@ -58,7 +58,7 @@ set tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 
 " Disable F1
 nmap <F1> <nop>
-"
+
 " Move up and down editor lines, not file lines
 nnoremap j gj
 nnoremap k gk
@@ -94,3 +94,6 @@ nmap <leader>n :nohl<CR>
 
 " Start Goyo with ,g:
 nnoremap <leader>g :Goyo<CR>
+
+" Highlight current word and all similar words with ,6:
+nnoremap <leader>6 *N
