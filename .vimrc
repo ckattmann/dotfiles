@@ -5,7 +5,6 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
-
 " Comment out and in with gc<movement>:
 Plugin 'tpope/vim-commentary'
 " Hide all UI with :Goyo:
@@ -16,11 +15,12 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'wincent/terminus'
 " Fuzzy file search with C-P:
 Plugin 'ctrlpvim/ctrlp.vim'
-" Plugin for automatic Black on save:
-Plugin 'psf/black'
 " Ctrl-n for another cursor on *:
 Plugin 'terryma/vim-multiple-cursors'
-
+" Select based on indentation with ai, ii, aI:
+Plugin 'michaeljsmith/vim-indent-object'
+" Plugin for automatic Black on save:
+" Plugin 'psf/black'
 call vundle#end()
 
 
@@ -52,7 +52,6 @@ set wrap
 set tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 
 
-
 "" Key bindings
 "" ============
 
@@ -76,7 +75,7 @@ command Wq wq
 let g:goyo_width=100
 
 " Auto black on save for Python files
-autocmd BufWritePre *.py execute ':Black'
+" autocmd BufWritePre *.py execute ':Black'
 
 
 
@@ -86,14 +85,17 @@ autocmd BufWritePre *.py execute ':Black'
 " Set leader to ,
 let mapleader = ","
 
-" Spelling with ,s
+" s: Set Spelling
 nnoremap <leader>s :set spell!<CR>
 
-" Un-highlight with ,n:
+" n: Un-highlight
 nmap <leader>n :nohl<CR>
 
-" Start Goyo with ,g:
+" g: Start Goyo
 nnoremap <leader>g :Goyo<CR>
 
-" Highlight current word and all similar words with ,6:
+" 6: Highlight current word and all similar words
 nnoremap <leader>6 *N
+
+" u: Underline current comment line with ===
+nnoremap <leader>u yypwv$r=
