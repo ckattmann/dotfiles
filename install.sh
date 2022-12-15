@@ -12,17 +12,5 @@ sudo apt-get install -y vim
 sudo apt-get install -y build-essential cmake
 sudo apt-get install -y python-dev
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-vim +PluginInstall +qall
-python3 ~/.vim/bundle/YouCompleteMe/install.py
-chown -R $USER ~/.vim
- 
-# Bash
-echo "-> Linking .bashrc into home directory"
-if [ -e "~/.bash_aliases" ]
-then
-    echo '    -> .bash_aliases exists, moving to .bash_aliases2'
-    mv ~/.bashaliases ~/.bash_aliases2
-fi
-ln -s $(pwd)/.bash_aliases ~/.bash_aliases
 
-source ~/.bashrc
+vim +PluginInstall +qall

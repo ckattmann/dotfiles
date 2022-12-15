@@ -1,0 +1,51 @@
+---
+- name: Update machine with dev tools
+  hosts: devmachines
+
+  tasks:
+    - name: Install wget, git, vim,  zsh, fzf, fd-find, tree, batcat
+      become: yes
+      ansible.builtin.apt:
+        pkg:
+        - wget
+        - git
+        - vim
+        - zsh
+        - fzf
+        - fd-find
+        - tree
+        - bat
+
+    - name: Copy .vimrc
+      ansible.builtin.copy:
+        src: .vimrc
+        dest: ~/.vimrc
+
+    - name: Install plugins
+      ansible.builtin.shell:
+        cmd: vim +PluginInstall +qall
+
+    - name: Install oh-my-zsh
+      ansible.builtin.shell:
+        cmd: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+        creates: ~/.oh-my-zsh
+
+    - name: Modify Plugins in .zshrc
+      ansible.builtin.lineinfile:
+        path: ~/.zshrc
+        regexp: '^Plugins='
+        line: 'Plugins=(git fzf fzf-tab fd)'
+
+    - name: Copy .zshrc-addons
+      ansible.builtin.copy:
+        src: .zshrc-addons
+        dest: ~/.zshrc-addons
+
+    - name: Source custom addons in .zshrc
+      ansible.builtin.lineinfile:
+        path: ~/.zshrc
+        line: 'source ~/zshrc-addons'
+
+    - name: Make zsh the standard shell
+      ansible.builtin.shell:
+        cmd: sudo chsh -s $(which zsh) bss
