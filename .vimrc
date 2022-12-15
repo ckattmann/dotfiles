@@ -5,7 +5,6 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
-
 " Comment out and in with gc<movement>:
 Plugin 'tpope/vim-commentary'
 " Hide all UI with :Goyo:
@@ -16,8 +15,6 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'wincent/terminus'
 " Fuzzy file search with C-P:
 Plugin 'ctrlpvim/ctrlp.vim'
-" Plugin for automatic Black on save:
-Plugin 'psf/black'
 " Ctrl-n for another cursor on *:
 Plugin 'terryma/vim-multiple-cursors'
 " Show Indentation Lines :
@@ -25,10 +22,12 @@ Plugin 'Yggdroot/indentLine'
 " JSON Formatter, basically just to fix indentLine's behaviour in json files:
 Plugin 'elzr/vim-json'
 Plugin 'digitaltoad/vim-pug'
-" Nord colorscheme:
-" Plugin 'arcticicestudio/nord-vim'
 " Gruv colorscheme: (https://github.com/morhetz/gruvbox)
 Plugin 'morhetz/gruvbox'
+" Select based on indentation with ai, ii, aI:
+Plugin 'michaeljsmith/vim-indent-object'
+" Plugin for automatic Black on save:
+Plugin 'psf/black'
 call vundle#end()
 
 
@@ -90,7 +89,7 @@ if executable(s:clip)
 endif
 
 
-"" KEY BINDINGS
+"" Key bindings
 "" ============
 
 " Disable F1
@@ -127,7 +126,7 @@ let g:indentLine_color_term = 239
 let g:goyo_width = 100
 
 " Auto black on save for Python files
-autocmd BufWritePre *.py execute ':Black'
+" autocmd BufWritePre *.py execute ':Black'
 
 let g:black_linelength = 100
 
@@ -137,20 +136,23 @@ let g:black_linelength = 100
 " Set leader to ,
 let mapleader = ","
 
-" Spelling with ,s
+" ,s -> Set Spelling
 nnoremap <leader>s :set spell!<CR>
 
-" Un-highlight with ,n:
+" ,n -> Un-highlight
 nmap <leader>n :nohl<CR>
 
-" Start Goyo with ,g:
+" ,g -> Start Goyo
 nnoremap <leader>g :Goyo<CR>
 
-" Highlight current word and all similar words with ,6:
+" ,6 -> Highlight current word and all similar words
 nnoremap <leader>6 *N
 
-" Paste from 0 register for multiple pastes of the same copied text:
+" ,p -> Paste from 0 register for multiple pastes of the same copied text:
 nnoremap <leader>p "0p
 
-" Run current buffer with python
+" ,r -> Run current buffer with python
 nnoremap <leader>r :w<CR>:!python %<CR>
+
+" ,u -> Underline current comment line with ===
+nnoremap <leader>u yypwv$r=
