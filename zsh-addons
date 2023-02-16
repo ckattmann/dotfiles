@@ -6,13 +6,15 @@ alias lt2='exa -lbh --tree --level=3'
 PROMPT='%{$fg[green]%}%n%{$reset_color%}@%{$fg[blue]%}%M%{$reset_color%}:%c ➜ '
 
 export FZF_DEFAULT_COMMAND='fdfind'
-# Find and open files with vim:
-alias v="fdfind -H -L --type f -E .git -E __pycache__ | fzf --preview 'batcat --style=numbers --color=always --line-range :500 {}' | xargs -r -o vim"
+# Find and open files with nvim:
+alias v="fdfind -H -L --type f -E .git -E __pycache__ | fzf --preview 'batcat --style=numbers --color=always --line-range :500 {}' | xargs -r -o nvim"
 # Find and open directories:
 alias d='cd $(fdfind -H -L --type d -E .git -E __pycache__ | fzf --preview "tree -L 2 -I __pycache__ -C {} | head -200")'
 alias b='batcat'
 alias m="apropos . | fzf --preview 'man {1}' | cut -d ' ' -f 1 | xargs  man"
 alias gr='rgrep --color -n --exclude-dir=node_modules'
+
+alias vim='nvim'
 
 # Automatically activate Venv in .venv when cding into a dir:
 function cd() {

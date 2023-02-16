@@ -38,7 +38,9 @@ filetype plugin indent on
 "" GENERAL SETTINGS
 "" ================
 
-autocmd vimenter * ++nested colorscheme gruvbox
+" autocmd vimenter * ++nested colorscheme gruvbox
+colorscheme desert
+
 set background=dark
 " colorscheme nord
 
